@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Data
+data/raw/*
+data/interim/*
+data/processed/*
+
+# Environment
+.env
+
+# System
+.DS_Store
