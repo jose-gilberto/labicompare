@@ -8,11 +8,13 @@ def generate_comparison_table(
     position_preference: str = 'ht',
     full_page_width: bool = False,
     bold_best_result: bool = True,
-    allow_draw: bool = False,
+    allow_draw: bool = True,
     precision_case: int = 3
 ) -> str:
+    """
+    """
     columns_num = metrics.columns.shape[-1]
-    columns_align = 'l' + ('c' * (columns_num))
+    columns_align = 'l|' + ('c' * (columns_num))
     columns_name = '\\textbf{Dataset} & ' + ' & '.join(f'\\textbf{{{model}}}' for model in metrics.columns)
 
     header = f"""
@@ -23,15 +25,20 @@ def generate_comparison_table(
         \\begin{{tabular}}{{{columns_align}}}
             \\hline
             {columns_name} \\\\
+            \\hline\\hline
     """
-    
-    # Detecting the max value for each row
-    max_values = metrics.idxmax(axis=1)
-    for index, value in zip(max_values.index, max_values.values):
-        metrics.loc[index][value] = f'\\textbf{{{metrics.loc[index][value]}}}'
-        print(metrics.loc[index][value])
-        
-    
+
+    if bold_best_result:
+        # Detecting the max value for each row
+        maximum_values = metrics.max(axis=1)
+        for i, row in metrics.iterrows():
+            for column_name, column_value in row.items():
+                count = -2 if allow_draw else -1
+                if maximum_values[i] <= column_value and count < 0:
+                    metrics.at[i, column_name] = f'\\textbf{{{column_value}}}'
+                    count += 1
+
+
     nl = '\n            '
     endline = ' \\\\'
     content = f"""        {nl.join((metrics.index[i] + ' & ' + ' & '.join(str(metric) for metric in line) + endline) for i, line in enumerate(metrics.values))}"""
@@ -45,17 +52,3 @@ def generate_comparison_table(
     table = header + content + footer
 
     return table
-
-
-if __name__ == '__main__':
-    df = pd.DataFrame({
-        'KNN': [0.1, 0.9, 0.2, 0.5],
-        'IsolationForest': [0.6, 0.2, 0.4, 0.5]
-    }, index=['FordA', 'Adiac', 'ECG200', 'BeetleFly'])
-    
-    print(generate_comparison_table(
-        df,
-        caption='Example of Caption',
-        label='example_label',
-        full_page_width=True
-    ))
