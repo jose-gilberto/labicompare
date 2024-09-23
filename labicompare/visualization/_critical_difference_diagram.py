@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from labicompare.stats import calculate_average_ranks, nemenyi, bonferroni_dunn
-from .utils import _graph_ranks
+from labicompare.stats import calculate_average_ranks, nemenyi, bonferroni_dunn, wilcoxon_holm
+from .utils import _graph_ranks, _wilcoxon_graph_ranks
 
 
 def diagram_nemenyi(
@@ -30,6 +30,17 @@ def diagram_bonferroni(
     )
     return fig
 
+def diagram_wilcoxon(
+    metrics: pd.DataFrame,
+    alpha: float = 0.05,
+):
+    p_values, _ = wilcoxon_holm(metrics, alpha=alpha)
+    avg_ranks = calculate_average_ranks(metrics).sort_values(ascending=False)
+
+    fig = _wilcoxon_graph_ranks(avg_ranks.values, avg_ranks.keys(), p_values, cd=None, reverse=True, width=9, textspace=1.5, labels=False)
+
+    return fig
+
 
 def critical_difference_diagram(
     metrics: pd.DataFrame,
@@ -47,5 +58,7 @@ def critical_difference_diagram(
         return diagram_bonferroni(
             avg_ranks=avg_ranks, n_experiments=num_experiments, alpha=alpha
         )
+    if test == 'wilcoxon':
+        return diagram_wilcoxon(metrics, alpha=alpha)
     else:
         raise NotImplemented()

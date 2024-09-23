@@ -6,19 +6,17 @@ from scipy.stats import friedmanchisquare, wilcoxon
 
 
 def wilcoxon_holm(metrics: pd.DataFrame, alpha: float = 0.05) -> List[Tuple[str, str, float, bool]]:
-    # Friedman p-value => test the null hypothesis using friedman before the post-hoc analysis
+    """"""
     friedman_p_value = friedmanchisquare(*(
         np.array(metrics[classifier].values) for classifier in metrics.columns
-    ))[1] # Return `stats, p_value`, as we want just the p-value we can get only the second position
-    
+    ))[1]
+
     if friedman_p_value > alpha:
-        print('The null hypothesis over the entire classifiers could not be rejected.')
-        return []
-    
-    # Number of classifiers
+        raise ValueError('The null hypothesis over the entire classifiers could not be rejected.')
+
     m = metrics.columns.shape[0]
     p_values = []
-    
+
     # Loop through the algorithms to perform a pair-wise test
     for i in range(m - 1):
         # Get the first classifier
@@ -32,7 +30,7 @@ def wilcoxon_holm(metrics: pd.DataFrame, alpha: float = 0.05) -> List[Tuple[str,
             # Calculate the p-value
             p_value = wilcoxon(classifier_1_perf, classifier_2_perf, zero_method='pratt')[1] # Return stats, pvalue, zstats
             p_values.append((classifier_1, classifier_2, p_value, False))
-            
+
     k = len(p_values) # Get the number of hypothesis
     p_values.sort(key=operator.itemgetter(2))
     
@@ -45,4 +43,4 @@ def wilcoxon_holm(metrics: pd.DataFrame, alpha: float = 0.05) -> List[Tuple[str,
         else:
             break
 
-    return p_values
+    return p_values, m
