@@ -52,10 +52,41 @@ This code will generate the following figure:
 
 ### Plotting a Critical Difference Diagram
 
+To generate a critical difference diagram using Nemenyi test you only need to call `critical_difference_diagram` function and pass `test='nemenyi'`. Other tests such Wilcoxon-Holm or Bonferroni-Dunn are already supported.
+
+```python
+from labicompare.visualization import critical_difference_diagram
+
+fig = critical_difference_diagram(
+    metrics=metrics,
+    test='nemenyi',
+    alpha=0.05
+)
+```
+
+This code will generate the following figure:
+
+![CDD Nemenyi](./docs/assets/cdd-nemenyi.png)
+
 ## How to Contribute
 
-## Issues
+To contribute with this repository you only have to follow these steps:
+1. Fork this repository
+2. Clone your fork locally and create a branch with the name of the feature you're working on. (ex.: `feat/multi-comparison-matrix`)
+3. Post on Issues/Pull Request the feature you are working on
+4. Create a PR with your changes from your fork
+5. Once approved your changes will be merged into this repo.
 
 ## Acknowledgements and References
 
+
 ## Next Steps/TODO
+
+- [ ] Nemenyi Test
+- [ ] Bonferroni Test
+- [ ] Wilcoxon Holm Test
+- [ ] One-vs-One Plot
+- [ ] Parameters Plot
+- [ ] Generate Latex Tables
+- [ ] Statisticall Comparison (Table with Avg Ranking, Avg Metrics, ...)
+- [ ] Multi-Comparison-Matrix
