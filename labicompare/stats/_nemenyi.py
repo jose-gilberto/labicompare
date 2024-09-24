@@ -13,6 +13,10 @@ def nemenyi(avg_ranks: pd.Series, n: int, alpha: float = 0.05) -> float:
 
     Returns:
         cd (float): critical difference value.
+
+    Refs:
+        [1] Nemenyi, Peter Bjorn. Distribution-free multiple comparisons. Princeton University, 1963.
+        [2] Demšar, Janez. "Statistical comparisons of classifiers over multiple data sets." The Journal of Machine learning research 7 (2006): 1-30.
     """
     ranks = avg_ranks.values
     k = ranks if isinstance(ranks, int) else len(ranks)
