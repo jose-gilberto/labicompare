@@ -79,6 +79,16 @@ To contribute with this repository you only have to follow these steps:
 
 ## Acknowledgements and References
 
+References:  
+[1] M. Friedman, “A comparison of alternative tests of significance for the problem of m rankings,” The Annals of Mathematical Statistics, vol. 11, no. 1, pp. 86–92, 1940.  
+[2] F. Wilcoxon, “Individual comparisons by ranking methods,” Biometrics Bulletin, vol. 1, no. 6, pp. 80–83, 1945.  
+[3] S. Holm, “A simple sequentially rejective multiple test procedure, ”Scandinavian Journal of Statistics, vol. 6, no. 2, pp. 65–70, 1979.  
+[4] Demšar, Janez. "Statistical comparisons of classifiers over multiple data sets." The Journal of Machine learning research 7 (2006): 1-30.  
+[5] Nemenyi, Peter Bjorn. Distribution-free multiple comparisons. Princeton University, 1963.  
+[6] Dunn, O. J. (1961). Multiple Comparisons among Means. Journal of the American Statistical Association, 56(293), 52–64.  
+[7] Ismail Fawaz, Hassan, et al. "Deep learning for time series classification: a review." Data mining and knowledge discovery 33.4 (2019): 917-963.  
+[8] Ismail-Fawaz, Ali, et al. "Lite: Light inception with boosting techniques for time series classification." 2023 IEEE 10th International Conference on Data Science and Advanced Analytics (DSAA). IEEE, 2023.  
+[9] Ismail-Fawaz, Ali, et al. "An approach to multiple comparison benchmark evaluations that is stable under manipulation of the comparate set." arXiv preprint arXiv:2305.11921 (2023).
 
 ## Next Steps/TODO
 
