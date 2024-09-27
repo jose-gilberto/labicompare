@@ -92,11 +92,14 @@ References:
 
 ## Next Steps/TODO
 
-- [ ] Nemenyi Test
-- [ ] Bonferroni Test
+- [x] Nemenyi Test
+- [x] Bonferroni Test
 - [ ] Wilcoxon Holm Test
 - [ ] One-vs-One Plot
 - [ ] Parameters Plot
 - [ ] Generate Latex Tables
 - [ ] Statisticall Comparison (Table with Avg Ranking, Avg Metrics, ...)
-- [ ] Multi-Comparison-Matrix
+- [x] Multi-Comparison-Matrix
+- [ ] Refactor MCM module
+- [ ] Refactor Visualization Utils
+- [ ] Results Histogram
