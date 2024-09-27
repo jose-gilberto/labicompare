@@ -10,7 +10,7 @@ from .utils import *
 
 
 def generate_mcm(
-    df_results,
+    metrics: pd.DataFrame,
     used_statistic="Accuracy",
     plot_1v1_comparisons=False,
     order_WinTieLoss="higher",
@@ -96,17 +96,8 @@ def generate_mcm(
 
 
     """
-
-    if isinstance(df_results, str):
-        # assuming its a path
-        try:
-            df_results = pd.read_csv(df_results)
-        except:
-            print("No dataframe or valid path is given")
-            return
-
     analysis = get_analysis(
-        df_results,
+        metrics,
         used_statistic=used_statistic,
         plot_1v1_comparisons=plot_1v1_comparisons,
         order_WinTieLoss=order_WinTieLoss,
@@ -124,7 +115,6 @@ def generate_mcm(
         load_analysis=load_analysis,
     )
 
-    #### start drawing heatmap
     draw(
         analysis,
         row_comparates=row_comparates,
