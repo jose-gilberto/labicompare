@@ -37,7 +37,18 @@ def diagram_wilcoxon(
     p_values, _ = wilcoxon_holm(metrics, alpha=alpha)
     avg_ranks = calculate_average_ranks(metrics).sort_values(ascending=False)
 
-    fig = _wilcoxon_graph_ranks(avg_ranks.values, avg_ranks.keys(), p_values, cd=None, reverse=True, width=9, textspace=1.5, labels=False)
+    # TODO: refactor the wilcoxon graph ranks to use the same graph ranks
+    # function as nemenyi and bonferroni
+    fig = _wilcoxon_graph_ranks(
+        avg_ranks.values,
+        avg_ranks.keys(),
+        p_values,
+        cd=None,
+        reverse=True,
+        width=9,
+        textspace=1.5,
+        labels=False
+    )
 
     return fig
 

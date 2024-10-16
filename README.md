@@ -94,7 +94,7 @@ References:
 
 - [x] Nemenyi Test
 - [x] Bonferroni Test
-- [ ] Wilcoxon Holm Test
+- [x] Wilcoxon Holm Test
 - [ ] One-vs-One Plot
 - [ ] Parameters Plot
 - [ ] Generate Latex Tables
