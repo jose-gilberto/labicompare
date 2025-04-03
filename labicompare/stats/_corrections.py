@@ -81,3 +81,78 @@ class BonferroniCorrection(Correction):
             reject_ = np.empty_like(reject)
             reject_[sort_idxs] = reject
             return reject_, p_values_corrected_, alpha_sidak, alpha_bonferroni
+
+
+class SidakCorrection(Correction):
+    """
+    Applies the Sidak correction to a list of p-values to control the family-wise 
+    error rate (FWER) in multiple hypothesis testing.
+
+    The Šidák correction is a statistical adjustment method that, unlike Bonferroni, 
+    assumes that multiple tests are **independent**. It is slightly less conservative 
+    than Bonferroni and adjusts the significance threshold using the formula:
+        
+        alpha_corrected = 1 - (1 - alpha)^(1/m)
+
+    where `m` is the number of comparisons.
+
+    The corrected p-values are computed as:
+    
+        p_values_corrected = 1 - (1 - p)^n
+
+    This correction ensures that the overall probability of making at least one Type I 
+    error does not exceed `alpha`.
+
+    Notes
+    -----
+    - The Sidak correction assumes **independence** of tests. If tests are 
+      positively correlated, it behaves similarly to the Bonferroni correction.
+    - It is **less conservative than Bonferroni**, leading to fewer false negatives 
+      (Type II errors).
+    - If the number of comparisons is large, other methods like Holm-Sidak or 
+      Benjamini-Hochberg may be preferable.
+
+    References
+    ----------
+    - Šidák, Z. (1967). "Rectangular Confidence Regions for the Means of 
+      Multivariate Normal Distributions". Journal of the American Statistical 
+      Association, 62(318), 626-633.
+    - Holm, S. (1979). "A simple sequentially rejective multiple test procedure". 
+      Scandinavian Journal of Statistics, 6(2), 65-70.
+    - Abdi, H. (2007). "Bonferroni and Sidak corrections for multiple comparisons". 
+      In *Encyclopedia of Measurement and Statistics* (Vol. 3, pp. 103-107).
+    """
+    
+    def __init__(self):
+        super().__init__()
+
+    @staticmethod
+    @abstractmethod
+    def apply(p_values, alpha = 0.05, max_iter = 1, is_sorted = False, return_sorted = False):
+        p_values = np.asarray(p_values)
+        alpha_f = alpha
+
+        if not is_sorted:
+            sort_idxs = np.argsort(p_values)
+            p_values = np.take(p_values, sort_idxs)
+
+        n_tests = len(p_values)
+        alpha_sidak = 1 - np.power((1. - alpha_f), (1. / n_tests))
+        alpha_bonferroni = alpha_f / float(n_tests)
+
+        reject = p_values <= alpha_sidak
+        p_values_corrected = np.expm1(n_tests * np.log1p(-p_values))
+
+        if p_values_corrected is not None:
+            p_values_corrected[p_values_corrected > 1] = 1
+
+        if is_sorted or return_sorted:
+            return reject, p_values_corrected, alpha_sidak, alpha_bonferroni
+        else:
+            p_values_corrected_ = np.empty_like(p_values_corrected)
+            p_values_corrected_[sort_idxs] = p_values_corrected
+            del p_values_corrected
+
+            reject_ = np.empty_like(reject)
+            reject_[sort_idxs] = reject
+            return reject_, p_values_corrected_, alpha_sidak, alpha_bonferroni
