@@ -156,3 +156,100 @@ class SidakCorrection(Correction):
             reject_ = np.empty_like(reject)
             reject_[sort_idxs] = reject
             return reject_, p_values_corrected_, alpha_sidak, alpha_bonferroni
+
+
+class HolmSidakCorrection(Correction):
+    """
+    Applies the Holm-Sidak correction for multiple hypothesis testing, controlling 
+    the Family-Wise Error Rate (FWER) while being less conservative than the 
+    Bonferroni correction.
+
+    The Holm-Sidak method is a **step-down procedure** that adjusts the p-values in 
+    an ordered sequence. It controls the probability of making at least one Type I 
+    error when performing multiple comparisons.
+
+    The correction follows these steps:
+
+    1. **Sort** the p-values in ascending order.
+    2. **Compute adjusted significance thresholds** for each hypothesis:
+
+        alpha_corrected(i) = 1 - (1 - alpha)^(1 / (m - i + 1))
+
+    where:
+       - `i` is the rank (starting from the smallest p-value)
+       - `m` is the total number of hypotheses
+
+    3. **Compare each p-value with its adjusted threshold**. The first **non-significant** 
+       p-value (p > alpha_corrected(i)) means all subsequent hypotheses are also considered 
+       non-significant.
+
+    The Holm-Sidak method is more **powerful than Bonferroni** because it applies 
+    progressively larger significance thresholds as more hypotheses are rejected.
+
+    Notes
+    -----
+    - The Holm-Sidak method is **less conservative than Bonferroni**, reducing Type II errors.
+    - It assumes **independent or weakly correlated** tests.
+    - If tests are strongly correlated, adjustments may still be too strict.
+    - Holm-Sidak is a stepwise improvement over Sidak and Holm-Bonferroni.
+
+
+    References
+    ----------
+    - Holm, S. (1979). "A simple sequentially rejective multiple test procedure". 
+      Scandinavian Journal of Statistics, 6(2), 65-70.
+    - Sidak, Z. (1967). "Rectangular Confidence Regions for the Means of Multivariate 
+      Normal Distributions". Journal of the American Statistical Association, 62(318), 626-633.
+    - Abdi, H. (2010). "Holm's sequential Bonferroni procedure". In *Encyclopedia of 
+      Research Design* (Vol. 1, pp. 1-8).
+    """
+    
+    def __init__(self):
+        super().__init__()
+
+    @staticmethod
+    @abstractmethod
+    def apply(p_values, alpha = 0.05, max_iter = 1, is_sorted = False, return_sorted = False):
+        p_values = np.asarray(p_values)
+        alpha_f = alpha
+
+        if not is_sorted:
+            sort_idxs = np.argsort(p_values)
+            p_values = np.take(p_values, sort_idxs)
+
+        n_tests = len(p_values)
+        alpha_sidak = 1 - np.power((1. - alpha_f), (1. / n_tests))
+        alpha_bonferroni = alpha_f / float(n_tests)
+
+        alpha_sidak_all = 1 - np.power(1 - np.power((1. - alpha_f), (1. / np.arange(n_tests, 0, -1))))
+        not_reject = p_values > alpha_sidak_all
+        del alpha_sidak_all
+
+        nr_index = np.nonzero(not_reject)[0]
+        if nr_index.size == 0:
+            not_reject_min = len(p_values)
+        else:
+            not_reject_min = np.min(nr_index)
+
+        not_reject[not_reject_min:] = True
+        reject = ~not_reject
+        del not_reject
+
+        p_values_corrected_raw = -np.expm1(np.arange(n_tests, 0, -1) * np.log1p(-p_values))
+        p_values_corrected = np.maximum.accumulate(p_values_corrected_raw)
+        del p_values_corrected_raw
+
+        if p_values_corrected is not None:
+            p_values_corrected[p_values_corrected > 1] = 1
+
+        if is_sorted or return_sorted:
+            return reject, p_values_corrected, alpha_sidak, alpha_bonferroni
+        else:
+            p_values_corrected_ = np.empty_like(p_values_corrected)
+            p_values_corrected_[sort_idxs] = p_values_corrected
+            del p_values_corrected
+
+            reject_ = np.empty_like(reject)
+            reject_[sort_idxs] = reject
+            return reject_, p_values_corrected_, alpha_sidak, alpha_bonferroni
+
