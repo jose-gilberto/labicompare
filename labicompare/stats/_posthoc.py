@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy.stats import studentized_range, norm
 from abc import ABC, abstractmethod
+from ._corrections import Correction
 
 
 def num_pairwise_comparisons(average_ranks: list[int]) -> float:
@@ -15,97 +16,46 @@ class PostHocTest(ABC):
     This class is an abstract class for implementing post hoc tests.
     It contains the basic methods and abstract signatures to facilitate implementations.
     """
-
-    @abstractmethod
-    def _critical_values(self) -> float:
-        raise NotImplementedError()
     
+    @staticmethod
     @abstractmethod
-    def _correction(self) -> float:
-        raise NotImplementedError()
-    
-    @abstractmethod
-    def test(self, average_ranks: list[float], n_datasets: int, alpha: float = 0.05) -> float:
+    def test(self, metrics: pd.DataFrame, alpha: float = 0.05, correction: Correction = None) -> float:
         raise NotImplementedError()
 
 
-class Nemenyi(PostHocTest):
-    """
-    The Nemenyi test is a post-hoc test that compares pairs of classifiers to determine
-    which differences are statistically significant.
+class Conover(PostHocTest):
 
-    References:
-        [1] Nemenyi, Peter Bjorn. Distribution-free multiple comparisons. Princeton University, 1963.
-        [2] Demšar, Janez. "Statistical comparisons of classifiers over multiple data sets."
-            The Journal of Machine learning research 7 (2006): 1-30.
-    """
-    def __init__(self) -> None:
-        super().__init__()
-
-    @staticmethod
-    def _critical_values(k: int, n: int, alpha: float = 0.05) -> float:
-        """ Computes the critical difference (CD) for the nemenyi test.
-
-        Args:
-            k (int): number of methods compared.
-            n (int): number of datasets compared.
-            alpha (float): alpha level.
-        """
-        q_alpha = studentized_range.ppf(1 - alpha, k, np.inf)
-        cd = q_alpha * np.sqrt(k * (k + 1) / (6.0 * n))
-        return cd
-
-    @staticmethod
-    def test(average_ranks: list[float], n: int, alpha: float = 0.05) -> float:
-        """
-        Returns the critical difference for Nemenyi post-hoc according to a given
-        alpha for the average ranking of n datasets.
-
-        Args:
-            average_ranks (list[float]): average ranking of the models
-            n (int): number of datasets compared
-            alpha (float): alpha level.
-        Returns:
-            cd (float): critical difference value.
-        """
-        k = len(average_ranks)
-        q_alpha = Nemenyi._critical_values(k, n, alpha)
-        
-        cd = q_alpha * np.sqrt((k * (k + 1)) / (6.0 * n))
-        
-        return cd
-
-
-class BonferroniDunn(PostHocTest):
-    """
-    """
     def __init__(self):
         super().__init__()
 
     @staticmethod
-    def _critical_values(self, k: int, n: int, alpha: float = 0.05):
-        """
-        Calculates the critical difference (CD) for the Bonferroni-Dunn test.
-        """
-        z_alpha = norm.ppf(1 - alpha / (2 * (k - 1))) # Bonferroni correction
-        cd = z_alpha * np.sqrt(k * (k + 1) / (6.0 * n))
-        return cd
+    def compare_conover(i, j):
+        ...
 
     @staticmethod
-    def test(average_ranks: list[float], n: int, alpha: float = 0.05) -> float:
-        """
-        Returns the critical difference for Bonferroni-Dunn post-hoc according to a given
-        alpha for the average ranking of n datasets.
+    def test(self,
+             metrics: pd.DataFrame,
+             metric_name: str,
+             alpha: float = 0.05,
+             correction: Correction = None) -> float:
+        metrics = metrics.sort_values(by=['model', 'dataset'], ascending=True)
+        n = metrics['dataset'].unique().shape[0]
+        metrics['rank'] = metrics.groupby('dataset')[metric_name].rank(ascending=False)
+        
+        metrics_ranks_avg = metrics.groupby('model', observed=True)["rank"].mean()
+        metrics_ranks_sum = metrics.groupby('model', observed=True)["rank"].sum().to_numpy()
 
-        CD is based on the Wilcoxon Signed-Rank test to compare pairs of classifiers.
+        values = metrics.groupby('rank').count()[metric_name].to_numpy()
 
-        Args:
-            average_ranks (list[float]): average ranking of the models
-            n (int): number of datasets compared
-            alpha (float): alpha level.
-        Returns:
-            cd (float): critical difference value.
-        """
-        k = len(average_ranks)
-        cd = BonferroniDunn._critical_values(k, n, alpha)
-        return cd
+        tie_sum = np.sum(values[values != 1] ** 3 - values[values != 1])
+        tie_sum = 0 if not tie_sum else tie_sum
+
+        metrics_ties = np.min([1.0, 1.0 - tie_sum / (n ** 3 - n)])
+
+        h = (12. / (n * (n + 1.))) * np.sum(metrics_ranks_sum ** 2 / n) - 3. * (n + 1.)
+        h_cor = h / metrics_ties
+
+        if metrics_ties == 1:
+            S2 = n * (n + 1) / 12
+        else:
+            S2 = (1. / (n - 1.)) * (np.sum(metrics['rank'] ** 2) - ())
