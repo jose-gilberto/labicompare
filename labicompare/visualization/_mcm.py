@@ -115,7 +115,7 @@ def generate_mcm(
         load_analysis=load_analysis,
     )
 
-    draw(
+    fig = draw(
         analysis,
         row_comparates=row_comparates,
         col_comparates=col_comparates,
@@ -133,6 +133,8 @@ def generate_mcm(
         include_legend=include_legend,
         show_symetry=show_symetry,
     )
+
+    return fig
 
 
 def get_analysis(
@@ -589,4 +591,4 @@ def draw(
             verticalalignment="center",
         )
 
-    plt.show()
+    return fig
