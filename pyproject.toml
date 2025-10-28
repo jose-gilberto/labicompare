@@ -1,25 +1,28 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "labicompare"
-authors = [
-    {name = "Gilberto Barbosa", email = "gilberto.barbosa@usp.br"},
-]
-description = "A small lib for model comparison"
+version = "0.2.0"
+description = "A statistical comparison library for machine learning models."
+authors = ["Gilberto Medeiros <gilberto.barbosa@usp.br>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.8"
-keywords = ["one", "two"]
-license = {text = "BSD-3-Clause"}
-classifiers = [
-    "Programming Language :: Python :: 3",
+packages = [
+    {include = "labicompare", from="src"}
 ]
-dependencies = [
-    "numpy",
-    'importlib-metadata; python_version<"3.10"',
-]
-dynamic = ["version"]
 
-[tool.setuptools.packages]
-find = {}  # Scanning implicit namespaces is active by default
+[tool.poetry.dependencies]
+python = ">=3.9"
+numpy = "*"
+scipy = "*"
+pandas = "*"
+matplotlib = "*"
+seaborn = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+black = "*"
+ruff = "*"
+pre-commit = "*"

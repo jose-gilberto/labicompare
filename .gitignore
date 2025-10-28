@@ -18,3 +18,5 @@ data/processed/*
 
 */*.egg-info
 *.egg-info
+
+poetry.lock
