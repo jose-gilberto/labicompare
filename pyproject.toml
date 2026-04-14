@@ -34,7 +34,7 @@ ignore = []
 quote-style = "double"
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 disallow_untyped_defs = true
 ignore_missing_imports = true
 warn_return_any = true

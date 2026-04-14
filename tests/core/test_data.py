@@ -5,7 +5,7 @@ import pytest
 from labicompare.core.data import EvaluationData
 
 
-def test_evaluation_data_initialization():
+def test_evaluation_data_initialization() -> None:
   """Test if the EvaluationData class loads correctly a clean dataset."""
   df = pd.DataFrame(
     {"Model_A": [0.8, 0.85], "Model_B": [0.75, 0.9]},
@@ -19,7 +19,7 @@ def test_evaluation_data_initialization():
   assert eval_data.scores.shape == (2, 2)
   
 
-def test_evaluation_data_remove_nans():
+def test_evaluation_data_remove_nans() -> None:
   """Test if the EvaluationData class removes rows with NaNs correctly."""
   df = pd.DataFrame(
     {"Model_A": [0.8, np.nan, 0.9], "Model_B": [0.75, 0.8, 0.85]},
@@ -32,7 +32,7 @@ def test_evaluation_data_remove_nans():
   assert "Dataset_2" not in eval_data.dataset_names
   
   
-def test_evaluation_data_type_error():
+def test_evaluation_data_type_error() -> None:
   """Test if the EvaluationData class triggers an error if receives not an DataFrame."""
   with pytest.raises(TypeError):
     EvaluationData([0.9, 0.8])
