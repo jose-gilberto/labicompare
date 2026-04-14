@@ -1,0 +1,37 @@
+name: CI Labicompare
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  tests-and-linter:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Perform the code checkout
+      uses: actions/checkout@v4
+
+    - name: Config Python 3.9
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.9"
+
+    - name: Install Poetry
+      run: |
+        pip install poetry
+        poetry config virtualenvs.create false
+
+    - name: Install deps
+      run: poetry install
+
+    - name: Check styles and errors (Ruff)
+      run: poetry run python -m ruff check labicompare/ tests/
+
+    - name: Check Typos (MyPy)
+      run: poetry run mypy labicompare/
+
+    - name: Run Tests (Pytest)
+      run: poetry run pytest

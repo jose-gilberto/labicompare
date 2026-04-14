@@ -20,3 +20,5 @@ data/processed/*
 *.egg-info
 
 poetry.lock
+
+.vscode/*

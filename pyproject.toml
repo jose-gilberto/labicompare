@@ -1,28 +1,41 @@
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.poetry]
 name = "labicompare"
 version = "0.2.0"
-description = "A statistical comparison library for machine learning models."
-authors = ["Gilberto Medeiros <gilberto.barbosa@usp.br>"]
-license = "MIT"
+description = "A low-dependency library for statistical comparison and visualization for machine learning models."
+authors = ["Gilberto Barbosa <medeiros.gilberto.br@gmail.com>"]
 readme = "README.md"
-packages = [
-    {include = "labicompare", from="src"}
-]
+packages = [{include = "labicompare"}]
 
 [tool.poetry.dependencies]
-python = ">=3.9"
-numpy = "*"
-scipy = "*"
-pandas = "*"
-matplotlib = "*"
-seaborn = "*"
+python = "^3.10"
+numpy = "^1.26.0"
+pandas = "^2.1.0"
+matplotlib = "^3.8.0"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "*"
-black = "*"
+[tool.poetry.dev-dependencies]
 ruff = "*"
-pre-commit = "*"
+mypy = "*"
+pytest = "^9.0.3"
+pytest-cov = "^7.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.9"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
