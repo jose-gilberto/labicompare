@@ -37,4 +37,36 @@ def test_evaluation_data_type_error() -> None:
   with pytest.raises(TypeError):
     EvaluationData([0.9, 0.8])
 
+
+def test_evaluation_data_ranking_higher_is_better() -> None:
+  """Test if the EvaluationData class calculate ranks correctly maximizing scores."""
+  # dataset 1 -> A is better, B and C ties
+  # dataset 2 -> C is better, following B and A
+  df = pd.DataFrame(
+    {
+      "Model_A": [0.9, 0.7],
+      "Model_B": [0.8, 0.8],
+      "Model_C": [0.8, 0.9],
+    },
+    index=["Dataset_1", "Dataset_2"]
+  )
   
+  eval_data = EvaluationData(df)
+  
+  np.testing.assert_array_equal(eval_data.ranks[0], [1.0, 2.5, 2.5])
+  np.testing.assert_array_equal(eval_data.ranks[1], [3.0, 2.0, 1.0])
+
+
+def test_evaluation_data_ranking_lower_is_better() -> None:
+  """"Test if the EvaluationData class calculate ranks correctly minimizing scores."""
+  df = pd.DataFrame(
+    {
+      "Model_A": [10.5, 5.0], 
+      "Model_B": [12.0, 15.0]
+    }
+  )
+  
+  eval_data = EvaluationData(df, higher_is_better=False)
+  
+  np.testing.assert_array_equal(eval_data.ranks[0], [1.0, 2.0])
+  np.testing.assert_array_equal(eval_data.ranks[1], [1.0, 2.0])

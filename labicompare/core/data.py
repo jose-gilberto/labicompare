@@ -11,11 +11,12 @@ class EvaluationData:
   """
   """
   
-  def __init__(self, data: pd.DataFrame) -> None:
+  def __init__(self, data: pd.DataFrame, higher_is_better: bool = True) -> None:
     if not isinstance(data, pd.DataFrame):
       raise TypeError("Input 'data' must be a pandas.DataFrame.")
 
     self._df = data.copy()
+    self.higher_is_better = higher_is_better
     
     if self._df.isnull().values.any():
       logger.warning(
@@ -33,6 +34,16 @@ class EvaluationData:
     self.dataset_names: list[str] = self._df.index.tolist()
     
     self.scores: np.ndarray = self._df.values
+    
+    # If higher is better = True, the biggest score/value receive rank 1
+    # Otherwise, the lower score receive that rank
+    self.ranks_df = self._df.rank(
+      axis=1,
+      ascending=not self.higher_is_better,
+      method="average"
+    )
+
+    self.ranks: np.ndarray = self.ranks_df.values
     
   def __repr__(self) -> str:
     return (
