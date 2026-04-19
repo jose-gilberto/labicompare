@@ -1,72 +1,84 @@
-import itertools
 
 import numpy as np
-import pandas as pd
-
-from typing import Any
+import scipy.stats as st
 
 from labicompare.core.data import EvaluationData
-from labicompare.stats.wilcoxon import wilcoxon_test
+from labicompare.core.results import ComparisonSummary, PairwiseResult
+from labicompare.stats.friedman import friedman_test
 
 
-def adjust_holm(p_values: list[float]) -> list[float] | Any:
+def wilcoxon_holm(
+    data: EvaluationData,
+    alpha: float = 0.05
+) -> ComparisonSummary:
     """
-    Applies top-down Holm-Bonferroni correction to control the error
-    (FWER) in multiple tests.
-    """
-    n = len(p_values)
-    if n == 0:
-        return []
+    Returns the p_values for each pairwise comparison executed between the models 
+    provided in the dataset for Wilcoxon pairwise test with Holm alpha correction.
     
-    p_array = np.array(p_values)
-    sorted_indices = np.argsort(p_values)
-
-    adjusted_p = np.zeros(n)
-    running_max = 0.0
-
-    for step, idx in enumerate(sorted_indices):
-        multiplier = n - step
-
-        adj = min(p_array[idx] * multiplier, 1.0)
-
-        running_max = max(running_max, adj)
-        adjusted_p[idx] = running_max
-
-    return adjusted_p.tolist()
-
-
-def posthoc_wilcoxon(data: EvaluationData) -> pd.DataFrame:
-    """
-    Run pair-wise comparisons between all models using wilcoxon test and applies
-    Holm-Bonferroni correction.
+    The method uses a Friedman test to reject the null hypothesis of the entire 
+    models being statistically equivalent before proceeding.
 
     Args:
-        data: EvaluationData instance containing all results.
-    
+        data (EvaluationData): instance containing all results data.
+        alpha (float): Significance level (default: 0.05).
+
     Returns:
-        pandas.DataFrame symetric containing all adjusted p-values.
+        p_values: Tuple list (model_1, model_2, p_value, is_significant).
+            - model_1 and model_2: Name of each compared model.
+            - p_value: p-value for Wilcoxon test.
+            - is_significant: Bool indicating if its significant relevant 
+              after Holm correction.
+        m: Number of compared models.
     """
-    models = data.model_names
-    n_models = len(models)
 
-    results = pd.DataFrame(
-        np.ones((n_models, n_models)), index=models, columns=models
-    )
+    f_stat, f_p = friedman_test(data)
+    is_global_sig = f_p <= alpha
 
-    pairs = list(itertools.combinations(models, 2))
-
-    if not pairs:
-        return results
+    if not is_global_sig:
+        raise ValueError(
+            f"The null-hypothesis of Friedman test cannot be rejected "
+            f"(p-value: {f_p:.4f} > {alpha})."
+        )
     
-    p_values = []
-    for m1, m2 in pairs:
-        _, p = wilcoxon_test(data, model_1=m1, model_2=m2)
-        p_values.append(p)
+    models = data.model_names
+    model_means = data._df.mean().to_dict()
+    pairwise_list = []
+    
+    for i in range(len(models)):
+        for j in range(i + 1, len(models)):
+            m1, m2 = models[i], models[j]
+            perf1, perf2 = data._df[m1].values, data._df[m2].values
+            
+            p_val = float(st.wilcoxon(perf1, perf2, zero_method='pratt').pvalue)
+            mean_diff = float(np.mean(perf1 - perf2))
 
-    adjusted_p = adjust_holm(p_values)
+            winner = None
+            if mean_diff != 0:
+                if data.higher_is_better:
+                    winner = m1 if mean_diff > 0 else m2
+                else:
+                    winner = m1 if mean_diff < 0 else m2
 
-    for (m1, m2), p_adj in zip(pairs, adjusted_p):
-        results.loc[m1, m2] = p_adj
-        results.loc[m2, m1] = p_adj
+            pairwise_list.append(PairwiseResult(
+                model_a=m1, model_b=m2, p_value=p_val,
+                is_significant=False, winner=winner, mean_diff=mean_diff
+            ))
 
-    return results
+    pairwise_list.sort(key=lambda x: x.p_value)
+    k = len(pairwise_list)
+    for i in range(k):
+        if pairwise_list[i].p_value <= (alpha / (k - i)):
+            pairwise_list[i].is_significant = True
+        else:
+            break
+        
+    return ComparisonSummary(
+        friedman_stat=f_stat,
+        friedman_p_value=f_p,
+        is_global_sig=is_global_sig,
+        pairwise_results=pairwise_list,
+        model_means=model_means,
+        alpha=alpha,
+        higher_is_better=data.higher_is_better,
+        n_samples=len(data._df)
+    )
