@@ -41,7 +41,7 @@ df = pd.DataFrame(data_dict)
 eval_data = EvaluationData(df, higher_is_better=True)
 
 # 3. Run the statistical tests (e.g., Friedman + Wilcoxon-Holm)
-summary = evaluate_models(eval_data, alpha=0.05)
+summary = wilcoxon_holm(eval_data, alpha=0.05)
 
 print(summary)
 # Output: ComparisonSummary(Friedman P-Value=0.0012, H0=REJECTED, Models=4)
