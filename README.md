@@ -99,7 +99,7 @@ We welcome contributions from the community! Whether you want to fix a bug, add 
 
 1. Fork the repository and clone it locally:
     ```bash
-    git clone [https://github.com/your-username/labicompare.git](https://github.com/your-username/labicompare.git)
+    git clone https://github.com/jose-gilberto/labicompare.git
     cd labicompare
     ```
 
