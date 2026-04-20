@@ -1,105 +1,151 @@
-# Labicompare
+# LabiCompare
 
-## Installation
+LabiCompare is a Python library focused on the evaluation and statistical comparison of Machine Learning models. It simplifies the process of running hypothesis tests (such as Friedman and Wilcoxon-Holm) and generates visualizations, including Critical Difference (CD) Diagrams.
 
-Labicompare requires at least a Python version of `3.9` or greater. Currently to install labicompare you can use the following command:
+## Instalation
 
-```sh
-pip install git+https://github.com/jose-gilberto/labicompare/
-```
-Note that the package is currently on a alpha version. The commands used to install or the methods may change over time.
+Via PyPI (future - WIP):
 
-## Getting Started
-
-As soon as you have the metrics for all models that you want to compare, we only need to put these values in a .csv file in the following format:
-
-```
-model_1,model_2,model_3
-model_1_metric_1,model_2_metric_1,model_3_metric_1
-model_1_metric_2,model_2_metric_2,model_3_metric_2
-model_1_metric_3,model_2_metric_3,model_3_metric_3
+```bash
+pip install labicompare
 ```
 
-Each column represents a model, in this case models 1, 2 and 3. Each row of the dataset represents a metric obtained on tha dataset of that row. For example, the first line may represent the metrics for dataset A obtained by the models 1, 2 and 3.
+Or install it locally from the source code:
 
+```bash
+git clone https://github.com/jose-gilberto/labicompare.git
+cd labicompare
+pip install -e .
+```
+
+## Quick Start
+
+Here is how easy it is to compare the performance of multiple models across different datasets or folds:
 ```python
 import pandas as pd
+from labicompare.core.data import EvaluationData
 
-metrics = pd.DataFrame({
-    'CL1': [0.85, 0.88, 0.79],
-    'CL2': [0.80, 0.90, 0.82],
-    'CL3': [0.83, 0.87, 0.81]
-}, index=['Dataset A', 'Dataset B', 'Dataset C'])
+from labicompare.stats import evaluate_models 
+from labicompare.plots.ranking import plot_cd_diagram
+
+# 1. Prepare your data (Rows = Datasets/Folds, Columns = Models)
+data_dict = {
+    'Model_A': [0.85, 0.88, 0.82, 0.89],
+    'Model_B': [0.86, 0.89, 0.84, 0.90],
+    'Model_C': [0.70, 0.75, 0.72, 0.71],
+    'Proposed_Model': [0.91, 0.93, 0.89, 0.95]
+}
+df = pd.DataFrame(data_dict)
+
+# 2. Wrap the data (Accuracy: higher_is_better=True)
+eval_data = EvaluationData(df, higher_is_better=True)
+
+# 3. Run the statistical tests (e.g., Friedman + Wilcoxon-Holm)
+summary = evaluate_models(eval_data, alpha=0.05)
+
+print(summary)
+# Output: ComparisonSummary(Friedman P-Value=0.0012, H0=REJECTED, Models=4)
+
+# 4. Generate the Critical Difference Diagram (CD Diagram)
+fig = plot_cd_diagram(
+    data=eval_data,
+    summary=summary,
+    title="Model Comparison (Accuracy)"
+)
+fig.savefig("cd_diagram.png", dpi=300, bbox_inches='tight')
 ```
 
-### Plotting 1v1 Comparison
+## Core Components
 
-To generate a one versus one plot comparison you only need to call the `one_vs_one_plot` function from the visualization module.
+### 1. `EvaluationData`
+
+The base class that ingests your `pandas.DataFrame`.
+
+Key Parameter: `higher_is_better` (Boolean). Use `True` for metrics like Accuracy and F1-Score, and `False` for error metrics like RMSE or MAE. The library automatically handles ranking inversions under the hood.
+
+### 2. `ComparisonSummary`
+
+The object returned by the statistical testing functions. It stores:
+- Global results (Friedman's P-value).
+- Pairwise results (`pairwise_results`), including which model won and whether the difference is statistically significant.
+- Built-in Export: You can use `summary.to_dataframe()` to export the results into a tabular format, making it easy to convert to LaTeX or Markdown for your papers.
+
+### 3. Critical Difference Diagrams (`plot_cd_diagram`)
+
+The visual tool for comparing models. Our implementation features an enhanced UX tailored for academic publishing:
+
+- Bilateral Layout: Models are split evenly on both sides to prevent text overlap.
+- Maximal Cliques: Thick bars group models that have no statistically significant difference (ties), automatically preventing redundant sub-lines.
+- Inline Rankings: The exact average rank is displayed cleanly beneath each model's name.
+
+#### Highlighting Your Model
+
+If you are proposing a new model and want it to stand out in the diagram, use the highlight parameters:
 
 ```python
-from labicompare.visualization import one_vs_one_plot
-
-one_vs_one_plot(
-    metrics['CL1'].values,
-    metrics['CL3'].values,
-    'CL1', 'CL3'
+fig = plot_cd_diagram(
+    data=eval_data,
+    summary=summary,
+    highlight_models=['Proposed_Model'],
+    highlight_color='#d97706' # Optional custom color (Default: Amber/Orange)
 )
 ```
 
-This code will generate the following figure:
+## Contributing
 
-![One versus One Example](./docs/assets/one_vs_one_example.png)
+We welcome contributions from the community! Whether you want to fix a bug, add a new statistical test, or improve the documentation, your help is highly appreciated.
 
-### Plotting a Critical Difference Diagram
+### Development Setup
 
-To generate a critical difference diagram using Nemenyi test you only need to call `critical_difference_diagram` function and pass `test='nemenyi'`. Other tests such Wilcoxon-Holm or Bonferroni-Dunn are already supported.
+1. Fork the repository and clone it locally:
+    ```bash
+    git clone [https://github.com/your-username/labicompare.git](https://github.com/your-username/labicompare.git)
+    cd labicompare
+    ```
 
-```python
-from labicompare.visualization import critical_difference_diagram
+2. Create a virtual environment and install the development dependencies:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use: venv\Scripts\activate
+    pip install -e ".[dev]"   # Ensure you have a [dev] extra in your pyproject.toml or setup.py
+    ```
 
-fig = critical_difference_diagram(
-    metrics=metrics,
-    test='nemenyi',
-    alpha=0.05
-)
+#### Testing
+
+All new features and bug fixes should be accompanied by unit tests. We use pytest as our testing framework.
+
+To run the test suite:
+```bash
+pytest tests/
 ```
 
-This code will generate the following figure:
+#### Pull Request Process
 
-![CDD Nemenyi](./docs/assets/cdd-nemenyi.png)
+Create a new branch for your feature or bugfix (`git checkout -b feature/my-awesome-feature`).
 
-## How to Contribute
+Make your changes and commit them with descriptive messages.
 
-To contribute with this repository you only have to follow these steps:
-1. Fork this repository
-2. Clone your fork locally and create a branch with the name of the feature you're working on. (ex.: `feat/multi-comparison-matrix`)
-3. Post on Issues/Pull Request the feature you are working on
-4. Create a PR with your changes from your fork
-5. Once approved your changes will be merged into this repo.
+Ensure all tests pass and the code is properly formatted.
 
-## Acknowledgements and References
+Push your branch to your fork (`git push origin feature/my-awesome-feature`).
 
-References:  
-[1] M. Friedman, “A comparison of alternative tests of significance for the problem of m rankings,” The Annals of Mathematical Statistics, vol. 11, no. 1, pp. 86–92, 1940.  
-[2] F. Wilcoxon, “Individual comparisons by ranking methods,” Biometrics Bulletin, vol. 1, no. 6, pp. 80–83, 1945.  
-[3] S. Holm, “A simple sequentially rejective multiple test procedure, ”Scandinavian Journal of Statistics, vol. 6, no. 2, pp. 65–70, 1979.  
-[4] Demšar, Janez. "Statistical comparisons of classifiers over multiple data sets." The Journal of Machine learning research 7 (2006): 1-30.  
-[5] Nemenyi, Peter Bjorn. Distribution-free multiple comparisons. Princeton University, 1963.  
-[6] Dunn, O. J. (1961). Multiple Comparisons among Means. Journal of the American Statistical Association, 56(293), 52–64.  
-[7] Ismail Fawaz, Hassan, et al. "Deep learning for time series classification: a review." Data mining and knowledge discovery 33.4 (2019): 917-963.  
-[8] Ismail-Fawaz, Ali, et al. "Lite: Light inception with boosting techniques for time series classification." 2023 IEEE 10th International Conference on Data Science and Advanced Analytics (DSAA). IEEE, 2023.  
-[9] Ismail-Fawaz, Ali, et al. "An approach to multiple comparison benchmark evaluations that is stable under manipulation of the comparate set." arXiv preprint arXiv:2305.11921 (2023).
+Open a Pull Request against the main branch of this repository. Include a clear description of the changes and any related issue numbers.
 
-## Next Steps/TODO
+#### Reporting Issues
 
-- [x] Nemenyi Test
-- [x] Bonferroni Test
-- [x] Wilcoxon Holm Test
-- [ ] One-vs-One Plot
-- [ ] Parameters Plot
-- [ ] Generate Latex Tables
-- [ ] Statisticall Comparison (Table with Avg Ranking, Avg Metrics, ...)
-- [x] Multi-Comparison-Matrix
-- [ ] Refactor MCM module
-- [ ] Refactor Visualization Utils
-- [ ] Results Histogram
+If you find a bug or have a feature request, please open an issue on GitHub. Provide as much detail as possible, including steps to reproduce bugs or a clear rationale for new features.
+
+## 🎓 Citation
+
+If you use **labicompare** in your research or project, please consider citing it.
+
+```bibtex
+@misc{labicompare2026,
+  author       = {José Gilberto Barbosa de Medeiros Júnior},
+  title        = {labicompare: statistical comparison and visualization for Machine Learning models},
+  year         = {2026},
+  publisher    = {GitHub},
+  journal      = {GitHub repository},
+  howpublished = {\url{[https://github.com/jose-gilberto/labicompare](https://github.com/jose-gilberto/labicompare)}},
+}
+```
