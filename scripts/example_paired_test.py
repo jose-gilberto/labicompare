@@ -6,7 +6,6 @@ from labicompare.stats.pairwise import paired_ttest, sign_test, wilcoxon_signed_
 data = pd.read_csv('./results.csv', index_col='dataset')
 data = EvaluationData(data)
 
-
 res_t = paired_ttest(data, "InceptionTime", "FCN")
 res_sign = sign_test(data, "InceptionTime", "ROCKET")
 res_wilcox = wilcoxon_signed_rank(data, "FCN", "LITETime")

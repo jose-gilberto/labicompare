@@ -13,5 +13,4 @@ summary = wilcoxon_holm(dados, alpha=0.05)
 fig = plot_pvalue_matrix(summary, figsize=(14, 10))
 fig.savefig("example_heatmap.png", dpi=300, bbox_inches="tight")
 
-print("\n--- Automated Ranking ---")
 print(summary.get_leaderboard())
