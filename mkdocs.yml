@@ -19,11 +19,25 @@ plugins:
       handlers:
         python:
           paths: [.]
+  - mkdocs-jupyter:
+      execute: false
+      theme: light
+      include_source: True
+      ignore_h1_title: True
 
 nav:
   - Getting Started: index.md
   - How to Use: usage.md
   - Next Steps: next.md
+  - Tutorials:
+    - "01 - Data Loading": tutorials/01_loading_data.ipynb
+    - "02 - Friedman Test": tutorials/02_applying_friedman.ipynb
+    - "03 - Wilcoxon-Holm": tutorials/03_running_wilcoxon_holm.ipynb
+    - "04 - Individual Tests": tutorials/04_individual_pairwise_tests.ipynb
+    - "05 - Visualizing Diffs": tutorials/05_using_difference_diagrams.ipynb
+    - "06 - 1vs1 Plots": tutorials/06_visualizing_1vs1.ipynb
+    - "07 - P-Value Matrix": tutorials/07_pairwise_pvalue_matrix.ipynb
+    - "08 - CD Diagrams": tutorials/08_plot_cd_diagram.ipynb
   - API:
     - Data: api/data.md
     - Stats: api/stats.md
