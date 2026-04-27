@@ -1,0 +1,1424 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Statistical comparison for Machine Learning models">
+      
+      
+      
+        <link rel="canonical" href="https://jose-gilberto.github.io/labicompare/usage/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../next/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>How to Use - LabiCompare</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-use" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="LabiCompare" class="md-header__button md-logo" aria-label="LabiCompare" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LabiCompare
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to Use
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jose-gilberto/labicompare/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="LabiCompare" class="md-nav__button md-logo" aria-label="LabiCompare" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    LabiCompare
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jose-gilberto/labicompare/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparing-your-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Preparing Your Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-instantiating-evaluationdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Instantiating EvaluationData
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-manipulating-and-accessing-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Manipulating and Accessing Attributes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Manipulating and Accessing Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-model-and-dataset-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing Model and Dataset Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-the-ranks-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Ranks Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-raw-numpy-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing Raw NumPy Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistical-tests-comparison-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical Tests &amp; Comparison Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Statistical Tests &amp; Comparison Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistical-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Statistical Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-test-friedman-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Test (friedman module)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-hoc-tests-posthoc-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Post-hoc Tests (posthoc module)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Post-hoc Tests (posthoc module)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works-under-the-hood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works Under the Hood
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-standard-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Standard Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unpacking-the-comparisonsummary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unpacking the ComparisonSummary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/01_loading_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 - Data Loading and Exploration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/02_applying_friedman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 - Global Statistical Validation (Friedman Test)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/03_running_wilcoxon_holm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 - Pairwise Comparisons and Post-hoc Correction (Wilcoxon-Holm)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/04_individual_pairwise_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 - Individual Pairwise Comparisons (The Paired T-Test)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/05_using_difference_diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 - Visualizing Performance Differences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/06_visualizing_1vs1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 - Visualizing Head-to-Head Performance (1 vs 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/07_pairwise_pvalue_matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 - Pairwise P-Value Matrix Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/08_plot_cd_diagram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 - Publication-Ready CD Diagrams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/plots/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparing-your-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Preparing Your Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-instantiating-evaluationdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Instantiating EvaluationData
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-manipulating-and-accessing-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Manipulating and Accessing Attributes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Manipulating and Accessing Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-model-and-dataset-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing Model and Dataset Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-the-ranks-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Ranks Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-raw-numpy-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing Raw NumPy Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistical-tests-comparison-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical Tests &amp; Comparison Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Statistical Tests &amp; Comparison Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistical-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Statistical Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-test-friedman-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Test (friedman module)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-hoc-tests-posthoc-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Post-hoc Tests (posthoc module)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Post-hoc Tests (posthoc module)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works-under-the-hood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works Under the Hood
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-standard-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Standard Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unpacking-the-comparisonsummary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unpacking the ComparisonSummary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="how-to-use">How to Use?</h1>
+<h2 id="data-handling">Data Handling</h2>
+<p>The <code>EvaluationData</code> class is the main gateway into <strong>labicompare</strong>. Before you can run any statistical tests or generate plost, you must wrap your raw results in this class. It handles data validation, missing value treatment, and automatic ranking generation.</p>
+<h3 id="1-preparing-your-data">1. Preparing Your Data</h3>
+<p><code>labicompare</code> expects your data to be a standard <code>pandas.DataFrame</code> structured as a matrix:
+- <strong>Columns</strong> represent the <strong>Models</strong> you are comparing.
+- <strong>Rows</strong> represent the <strong>Datasets</strong>, Cross-Validation Folds, or independent experimental runs.</p>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+
+data_dict = {
+  'RandomForest': [0.85, 0.88, np.nan, 0.89], # Note the missing value
+  'XGBoost': [0.86, 0.89, 0.84, 0.90],
+  'SVM': [0.70, 0.75, 0.72, 0.71]
+}
+
+df = pd.DataFrame(
+  data_dict,
+  index=['Dataset_1', 'Dataset_2', 'Dataset_3', 'Dataset_4']
+)
+
+print(df)
+</code></pre>
+<p><strong>Outpus:</strong></p>
+<pre><code class="language-text">          RandomForest   XGBoost   SVM
+Dataset_1          0.85     0.86  0.70
+Dataset_2          0.88     0.89  0.75
+Dataset_3           NaN     0.84  0.72
+Dataset_4          0.89     0.90  0.71
+</code></pre>
+<h3 id="2-instantiating-evaluationdata">2. Instantiating EvaluationData</h3>
+<p>When creating the object, you must define the <code>higher_is_better</code> parameter.</p>
+<ul>
+<li>Use <code>True</code> for metrics like Accuracy, F1-Score, and AUC (where bigger is better, so the highest value gets Rank 1).</li>
+<li>Use <code>False</code> for error metrics like RMSE or MAE (where smaller is better, so the lowest value gets Rank 1).</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python">from labicompare.core.data import EvaluationData
+
+# Assuming Accuracy (higher is better)
+eval_data = EvaluationData(data=df, higher_is_better=True)
+print(eval_data)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-text">WARNING: Null values detected. Rows (or datasets) with NaNs will be removed to ensure the integrity of paired statistical tests and methods.
+&lt;EvaluationData: 3 datasets, 3 models&gt;
+</code></pre>
+<p><strong>Important Note on NaNs</strong>: Statistical tests for multiple comparisons (like Friedman) are paired. If a dataset is missing a score for even one model, <code>EvaluationData</code> automatically drops the entire row (dataset) to maintain the integrity of the tests. Notice that Dataset_3 was dropped, leaving 3 datasets.</p>
+<h3 id="3-manipulating-and-accessing-attributes">3. Manipulating and Accessing Attributes</h3>
+<p>Once initialized, EvaluationData computes the ranks automatically and exposes several useful attributes. You do not need to compute averages manually.</p>
+<h4 id="accessing-model-and-dataset-names">Accessing Model and Dataset Names</h4>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python">print(&quot;Models:&quot;, eval_data.model_names)
+print(&quot;Datasets:&quot;, eval_data.dataset_names)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-plaintext">Models: ['RandomForest', 'XGBoost', 'SVM']
+Datasets: ['Dataset_1', 'Dataset_2', 'Dataset_4']
+</code></pre>
+<h4 id="accessing-the-ranks-matrix">Accessing the Ranks Matrix</h4>
+<p>The class automatically calculates the ranks for each dataset. If there are ties, it assigns the average rank.</p>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python"># Access the pandas DataFrame of ranks
+print(eval_data.ranks_df)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-text">            RandomForest  XGBoost  SVM
+Dataset_1           2.0      1.0  3.0
+Dataset_2           2.0      1.0  3.0
+Dataset_4           2.0      1.0  3.0
+</code></pre>
+<h4 id="accessing-raw-numpy-arrays">Accessing Raw NumPy Arrays</h4>
+<p>If you need to build custom plots or pass the data to external mathematical functions, you can extract the raw NumPy matrices:</p>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python"># Raw scores (without NaNs)
+print(eval_data.scores)
+
+# Raw ranks
+print(eval_data.ranks)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-text">[[0.85 0.86 0.7 ]
+ [0.88 0.89 0.75]
+ [0.89 0.9  0.71]]
+
+[[2. 1. 3.]
+ [2. 1. 3.]
+ [2. 1. 3.]]
+</code></pre>
+<h2 id="statistical-tests-comparison-summary">Statistical Tests &amp; Comparison Summary</h2>
+<p>The <code>labicompare.stats</code> module provides the statistical engine to validate whether the differences in model performances are real or just due to random chance.</p>
+<p>We follow the standard non-parametric procedure recommended for Machine Learning benchmarks:  </p>
+<ol>
+<li><strong>Global Test (Friedman Test):</strong> Checks if there is <em>any</em> significant difference among the models overall.  </li>
+<li><strong>Post-hoc Test (Wilcoxon Signed-Rank with Holm's step-down procedure):</strong> If the global test finds a difference, this test compares the models pairwise to find out <em>which specific models</em> differ from each other, adjusting the p-values to prevent false positives (controlling the Family-Wise Error Rate). </li>
+</ol>
+<p>The labicompare.stats module is divided into specialized components to handle each stage of the statistical validation pipeline. This modular approach allows for fine-grained control over the evaluation process.</p>
+<h3 id="statistical-pipeline">Statistical Pipeline</h3>
+<p>To ensure scientific validity, the comparison follows a three-step sequence:  </p>
+<ol>
+<li>
+<p><strong>Global Test:</strong> Run the Friedman test to check for overall differences.  </p>
+</li>
+<li>
+<p><strong>Pairwise Comparison:</strong> Compute raw p-values for every model pair.  </p>
+</li>
+<li>
+<p><strong>Post-hoc Adjustment:</strong> Apply the Wilcoxon-Holm procedure to correct p-values for multiple comparisons.  </p>
+</li>
+</ol>
+<h4 id="global-test-friedman-module">Global Test (<code>friedman</code> module)</h4>
+<p>The Friedman test evaluates if at least one model performs significantly differently from the others.</p>
+<pre><code class="language-python">from labicompare.stats.friedman import friedman_test
+
+# Returns the statistic and the global p-value
+statistic, p_value = friedman_test(eval_data)
+print(f&quot;Friedman P-Value: {p_value:.5f}&quot;)
+</code></pre>
+<h4 id="post-hoc-tests-posthoc-module">Post-hoc Tests (<code>posthoc</code> module)</h4>
+<p>The <code>labicompare.stats.posthoc</code> module contains the <code>wilcoxon_holm</code> function. This function is the core statistical engine of the library, acting as an all-in-one pipeline that validates your data from the global level down to individual pairwise comparisons.</p>
+<h5 id="how-it-works-under-the-hood">How It Works Under the Hood</h5>
+<p>When you call <code>wilcoxon_holm</code>, it automatically executes a rigorous three-step procedure:</p>
+<ol>
+<li><strong>Global Significance Check (Friedman Test):</strong> It first runs the Friedman test. If the p-value is greater than your <code>alpha</code>, it raises a <code>ValueError</code> and stops. This strict behavior prevents you from reporting "false positive" pairwise differences when the models are globally equivalent.</li>
+<li><strong>Pairwise Wilcoxon Signed-Rank Test:</strong> For every possible pair of models, it computes the raw p-value and calculates the mean difference to determine the "winner" (respecting your <code>higher_is_better</code> flag).</li>
+<li><strong>Holm's Step-Down Correction:</strong> It sorts the raw p-values from smallest to largest and adjusts the significance threshold iteratively using the formula <span class="arithmatex">\(p_i \leq \frac{\alpha}{k - i}\)</span> (where <span class="arithmatex">\(k\)</span> is the total number of comparisons).</li>
+</ol>
+<h5 id="1-standard-usage">1. Standard Usage</h5>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python">from labicompare.stats.posthoc import wilcoxon_holm
+
+# Assuming eval_data is your instantiated EvaluationData object
+# The default alpha is 0.05
+summary = wilcoxon_holm(data=eval_data, alpha=0.05)
+
+print(summary)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-text">&lt;ComparisonSummary: Friedman P-value=0.0012, 3 Pairwise Comparisons&gt;
+</code></pre>
+<h3 id="unpacking-the-comparisonsummary">Unpacking the <code>ComparisonSummary</code></h3>
+<p>The function returns a rich <code>ComparisonSummary</code> object containing everything you need for plotting and reporting.</p>
+<p><strong>Input:</strong></p>
+<pre><code class="language-python"># 1. Global Test Results
+print(f&quot;Friedman Stat: {summary.friedman_stat:.2f}&quot;)
+print(f&quot;Global P-Value: {summary.friedman_p_value:.5f}\n&quot;)
+
+# 2. Pairwise Results
+for res in summary.pairwise_results:
+    print(f&quot;{res.model_a} vs {res.model_b}:&quot;)
+    print(f&quot;  Winner: {res.winner}&quot;)
+    print(f&quot;  P-value: {res.p_value:.5f}&quot;)
+    print(f&quot;  Significant: {res.is_significant}\n&quot;)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-text">Friedman Stat: 12.50
+Global P-Value: 0.00193
+
+XGBoost vs SVM:
+  Winner: XGBoost
+  P-value: 0.00312
+  Significant: True
+
+RandomForest vs SVM:
+  Winner: RandomForest
+  P-value: 0.04100
+  Significant: True
+
+XGBoost vs RandomForest:
+  Winner: XGBoost
+  P-value: 0.15400
+  Significant: False
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

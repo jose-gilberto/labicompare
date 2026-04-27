@@ -1,0 +1,2147 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Statistical comparison for Machine Learning models">
+      
+      
+      
+        <link rel="canonical" href="https://jose-gilberto.github.io/labicompare/api/plots/">
+      
+      
+        <link rel="prev" href="../stats/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Plots - LabiCompare</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#labicompare.plots.ranking.plot_cd_diagram" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="LabiCompare" class="md-header__button md-logo" aria-label="LabiCompare" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LabiCompare
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plots
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jose-gilberto/labicompare/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="LabiCompare" class="md-nav__button md-logo" aria-label="LabiCompare" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    LabiCompare
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jose-gilberto/labicompare/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/01_loading_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 - Data Loading and Exploration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/02_applying_friedman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 - Global Statistical Validation (Friedman Test)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/03_running_wilcoxon_holm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 - Pairwise Comparisons and Post-hoc Correction (Wilcoxon-Holm)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/04_individual_pairwise_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 - Individual Pairwise Comparisons (The Paired T-Test)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/05_using_difference_diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 - Visualizing Performance Differences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/06_visualizing_1vs1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 - Visualizing Head-to-Head Performance (1 vs 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/07_pairwise_pvalue_matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 - Pairwise P-Value Matrix Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08_plot_cd_diagram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 - Publication-Ready CD Diagrams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plots
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.ranking.plot_cd_diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_cd_diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.differences.plot_difference_distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_difference_distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.heatmap.plot_pvalue_matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_pvalue_matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.scatter.plot_one_vs_one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_one_vs_one
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.ranking.plot_cd_diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_cd_diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.differences.plot_difference_distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_difference_distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.heatmap.plot_pvalue_matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_pvalue_matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labicompare.plots.scatter.plot_one_vs_one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_one_vs_one
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Plots</h1>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="labicompare.plots.ranking.plot_cd_diagram"></a>
+    <div class="doc doc-contents first">
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>labicompare/plots/ranking.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_cd_diagram</span><span class="p">(</span>
+  <span class="n">data</span><span class="p">:</span> <span class="n">EvaluationData</span><span class="p">,</span>
+  <span class="n">summary</span><span class="p">:</span> <span class="n">ComparisonSummary</span><span class="p">,</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Critical Difference Diagram (Wilcoxon-Holm)&quot;</span><span class="p">,</span>
+  <span class="n">figsize</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+  <span class="n">highlight_models</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="n">highlight_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#d97706&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+
+  <span class="n">ranks</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+  <span class="n">ranks</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+  <span class="n">model_names</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+  <span class="n">avg_ranks</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">values</span>
+  <span class="n">n_models</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_names</span><span class="p">)</span>
+
+  <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_models</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span> 
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+
+  <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+      <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+  <span class="c1"># Main axis</span>
+  <span class="n">y_axis</span> <span class="o">=</span> <span class="mf">1.0</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_models</span><span class="p">],</span> <span class="p">[</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_models</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="p">[</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> 
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f2937&#39;</span><span class="p">)</span>
+
+  <span class="n">is_sig_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_models</span><span class="p">,</span> <span class="n">n_models</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">pairwise_results</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">model_a</span> <span class="ow">in</span> <span class="n">model_names</span> <span class="ow">and</span> <span class="n">res</span><span class="o">.</span><span class="n">model_b</span> <span class="ow">in</span> <span class="n">model_names</span><span class="p">:</span>
+      <span class="n">idx1</span> <span class="o">=</span> <span class="n">model_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">model_a</span><span class="p">)</span>
+      <span class="n">idx2</span> <span class="o">=</span> <span class="n">model_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">model_b</span><span class="p">)</span>
+      <span class="n">is_sig_matrix</span><span class="p">[</span><span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">is_significant</span>
+      <span class="n">is_sig_matrix</span><span class="p">[</span><span class="n">idx2</span><span class="p">,</span> <span class="n">idx1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">is_significant</span>
+
+  <span class="n">cliques</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_models</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_models</span><span class="p">):</span>
+      <span class="n">is_clique</span> <span class="o">=</span> <span class="kc">True</span>
+      <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+          <span class="k">if</span> <span class="n">is_sig_matrix</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]:</span>
+            <span class="n">is_clique</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_clique</span><span class="p">:</span>
+          <span class="k">break</span>
+      <span class="k">if</span> <span class="n">is_clique</span><span class="p">:</span>
+        <span class="n">cliques</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+  <span class="n">maximal_cliques</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="n">cliques</span><span class="p">:</span>
+    <span class="n">is_maximal</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">c2</span> <span class="ow">in</span> <span class="n">cliques</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">c1</span> <span class="o">!=</span> <span class="n">c2</span> <span class="ow">and</span> <span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">c2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">c1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">c2</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">is_maximal</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">break</span>
+    <span class="k">if</span> <span class="n">is_maximal</span> <span class="ow">and</span> <span class="n">c1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">maximal_cliques</span><span class="p">:</span>
+      <span class="n">maximal_cliques</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+
+  <span class="n">y_ns_base</span> <span class="o">=</span> <span class="mf">0.92</span> 
+  <span class="n">ns_line_step</span> <span class="o">=</span> <span class="mf">0.06</span>
+
+  <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">clique</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">maximal_cliques</span><span class="p">):</span>
+      <span class="n">start_rank</span> <span class="o">=</span> <span class="n">avg_ranks</span><span class="p">[</span><span class="n">clique</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+      <span class="n">end_rank</span> <span class="o">=</span> <span class="n">avg_ranks</span><span class="p">[</span><span class="n">clique</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+      <span class="n">y_ns</span> <span class="o">=</span> <span class="n">y_ns_base</span> <span class="o">-</span> <span class="p">(</span><span class="n">idx</span> <span class="o">*</span> <span class="n">ns_line_step</span><span class="p">)</span>
+
+      <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">start_rank</span><span class="p">,</span> <span class="n">end_rank</span><span class="p">],</span> <span class="p">[</span><span class="n">y_ns</span><span class="p">,</span> <span class="n">y_ns</span><span class="p">],</span> 
+              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+  <span class="c1"># 6. Calcular espaço para os nomes e desenhar conexões em &quot;L&quot;</span>
+  <span class="n">num_bars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maximal_cliques</span><span class="p">)</span>
+  <span class="n">lowest_ns_y</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">y_ns_base</span> <span class="o">-</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_bars</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ns_line_step</span><span class="p">)</span> <span class="k">if</span> <span class="n">num_bars</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">y_axis</span>
+  <span class="p">)</span>
+  <span class="n">y_name_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="n">lowest_ns_y</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span> 
+
+  <span class="n">split_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_models</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+  <span class="n">y_space_left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_name_max</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">))</span>
+  <span class="n">y_space_right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_name_max</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_models</span> <span class="o">-</span> <span class="n">split_idx</span><span class="p">))</span>
+
+  <span class="n">color_line</span> <span class="o">=</span> <span class="s1">&#39;#000000&#39;</span>
+
+  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">model_names</span><span class="p">,</span> <span class="n">avg_ranks</span><span class="p">)):</span>  
+    <span class="n">is_highlighted</span> <span class="o">=</span> <span class="n">highlight_models</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">highlight_models</span>
+
+    <span class="n">point_color</span> <span class="o">=</span> <span class="n">highlight_color</span> <span class="k">if</span> <span class="n">is_highlighted</span> <span class="k">else</span> <span class="s1">&#39;#1f77b4&#39;</span>
+    <span class="n">text_color</span> <span class="o">=</span> <span class="n">highlight_color</span> <span class="k">if</span> <span class="n">is_highlighted</span> <span class="k">else</span> <span class="s1">&#39;#111827&#39;</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">point_color</span><span class="p">,</span>
+               <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">split_idx</span><span class="p">:</span>
+        <span class="n">x_name</span> <span class="o">=</span> <span class="mf">0.2</span>
+        <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
+        <span class="n">y_name</span> <span class="o">=</span> <span class="n">y_space_left</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_name</span> <span class="o">=</span> <span class="n">n_models</span> <span class="o">+</span> <span class="mf">0.8</span>
+        <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
+        <span class="n">y_name</span> <span class="o">=</span> <span class="n">y_space_right</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">split_idx</span><span class="p">]</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">rank</span><span class="p">,</span> <span class="n">rank</span><span class="p">],</span> <span class="p">[</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">y_name</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color_line</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">rank</span><span class="p">,</span> <span class="n">x_name</span><span class="p">],</span> <span class="p">[</span><span class="n">y_name</span><span class="p">,</span> <span class="n">y_name</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color_line</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_name</span><span class="p">,</span> <span class="n">y_name</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="n">ha</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> 
+            <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_name</span><span class="p">,</span> <span class="n">y_name</span> <span class="o">-</span> <span class="n">offset</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">rank</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="n">ha</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> 
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#111827&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">fig</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="labicompare.plots.differences.plot_difference_distribution"></a>
+    <div class="doc doc-contents first">
+
+        <p>Generates a horizontal boxplot combined with a scatter plot (jitter)
+focused on difference between two models. The central line (zero) divides
+visually who wins in the majority of the samples.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>labicompare/plots/differences.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_difference_distribution</span><span class="p">(</span>
+  <span class="n">data</span><span class="p">:</span> <span class="n">EvaluationData</span><span class="p">,</span>
+  <span class="n">model_a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="n">model_b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="n">figsize</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Generates a horizontal boxplot combined with a scatter plot (jitter)</span>
+<span class="sd">  focused on difference between two models. The central line (zero) divides</span>
+<span class="sd">  visually who wins in the majority of the samples.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">model_a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">model_names</span> <span class="ow">or</span> <span class="n">model_b</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">model_names</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Models &#39;</span><span class="si">{</span><span class="n">model_a</span><span class="si">}</span><span class="s2">&#39; or &#39;</span><span class="si">{</span><span class="n">model_b</span><span class="si">}</span><span class="s2">&#39; not found in results.&quot;</span><span class="p">)</span>
+
+  <span class="n">diffs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">model_a</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">model_b</span><span class="p">]</span>
+  <span class="n">mean_diff</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+  <span class="n">median_diff</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+
+  <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+  <span class="n">max_abs_diff</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">diffs</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diffs</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+  <span class="n">limit</span> <span class="o">=</span> <span class="n">max_abs_diff</span> <span class="o">*</span> <span class="mf">1.15</span> 
+
+  <span class="n">color_win_a</span> <span class="o">=</span> <span class="s2">&quot;#10b981&quot;</span> <span class="c1"># Emerald Green</span>
+  <span class="n">color_win_b</span> <span class="o">=</span> <span class="s2">&quot;#ef4444&quot;</span> <span class="c1"># Coral Red</span>
+  <span class="n">color_tie</span> <span class="o">=</span> <span class="s2">&quot;#9ca3af&quot;</span>   <span class="c1"># Cool Gray</span>
+
+  <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span><span class="p">:</span>
+    <span class="n">point_colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diffs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                            <span class="n">color_win_a</span><span class="p">,</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diffs</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color_win_b</span><span class="p">,</span> <span class="n">color_tie</span><span class="p">))</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">point_colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diffs</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span>
+                            <span class="n">color_win_a</span><span class="p">,</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diffs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span><span class="n">color_win_b</span><span class="p">,</span> <span class="n">color_tie</span><span class="p">))</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#6b7280&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">boxprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;#f3f4f6&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9ca3af&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+  <span class="n">medianprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#374151&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+  <span class="n">whiskerprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9ca3af&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+  <span class="n">capprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9ca3af&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+  <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+    <span class="n">diffs</span><span class="p">,</span> 
+    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">widths</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">boxprops</span><span class="o">=</span><span class="n">boxprops</span><span class="p">,</span>
+    <span class="n">medianprops</span><span class="o">=</span><span class="n">medianprops</span><span class="p">,</span>
+    <span class="n">whiskerprops</span><span class="o">=</span><span class="n">whiskerprops</span><span class="p">,</span>
+    <span class="n">capprops</span><span class="o">=</span><span class="n">capprops</span><span class="p">,</span>
+    <span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span>
+  <span class="p">)</span>
+
+  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+  <span class="n">y_jitter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">diffs</span><span class="p">))</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">diffs</span><span class="p">,</span> 
+    <span class="n">y_jitter</span><span class="p">,</span> 
+    <span class="n">c</span><span class="o">=</span><span class="n">point_colors</span><span class="p">,</span> 
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span>
+  <span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mean_diff</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+
+  <span class="n">label_right</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Favors </span><span class="si">{</span><span class="n">model_a</span><span class="si">}</span><span class="s2"> →&quot;</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span>
+                 <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;Favors </span><span class="si">{</span><span class="n">model_b</span><span class="si">}</span><span class="s2"> →&quot;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">limit</span><span class="o">*</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="n">label_right</span><span class="p">,</span>
+          <span class="n">color</span><span class="o">=</span><span class="n">color_win_a</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span> <span class="k">else</span> <span class="n">color_win_b</span><span class="p">,</span> 
+          <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+  <span class="n">label_left</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;← Favors </span><span class="si">{</span><span class="n">model_b</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;← Favors </span><span class="si">{</span><span class="n">model_a</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="n">limit</span><span class="o">*</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="n">label_left</span><span class="p">,</span>
+          <span class="n">color</span><span class="o">=</span><span class="n">color_win_b</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span> <span class="k">else</span> <span class="n">color_win_a</span><span class="p">,</span> 
+          <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
+  <span class="n">stats_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">mean_diff</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">Median: </span><span class="si">{</span><span class="n">median_diff</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">stats_text</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+          <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+          <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round,pad=0.5&#39;</span><span class="p">,</span>
+                    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+                    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#d1d5db&#39;</span><span class="p">))</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">limit</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span> 
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute Difference (</span><span class="si">{</span><span class="n">model_a</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">model_b</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+                <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#374151&quot;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribution of Differences&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+               <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#111827&quot;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#e5e7eb&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;#9ca3af&#39;</span><span class="p">)</span>
+
+  <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+  <span class="k">return</span> <span class="n">fig</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="labicompare.plots.heatmap.plot_pvalue_matrix"></a>
+    <div class="doc doc-contents first">
+
+        <p>Generate a styled heatmap for p-values matrix from a post-hoc test.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>pvalue_matrix</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>DataFrame with pair-wise p-values.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>alpha</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Significance level (default: 0.05). Values &lt;= alpha will be in bold.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_alpha</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The exact value where the color changes to green (default: 0.10).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>figsize</code>
+            </td>
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="float">float</span>, <span title="float">float</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Size of the figure (width, height).</p>
+              </div>
+            </td>
+            <td>
+                  <code>(8, 6)</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>fontsize</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Size of the font used in this plot.</p>
+              </div>
+            </td>
+            <td>
+                  <code>12</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>grid_linewidth</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Width for the grid line used between cells.</p>
+              </div>
+            </td>
+            <td>
+                  <code>2.0</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="matplotlib.pyplot.Figure">Figure</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Figure instance from matplotlib, can be saved or showed.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>labicompare/plots/heatmap.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_pvalue_matrix</span><span class="p">(</span>
+    <span class="n">summary</span><span class="p">:</span> <span class="n">ComparisonSummary</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">fontsize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="n">grid_linewidth</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="s2">&quot;auto&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;equal&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a styled heatmap for p-values matrix from a post-hoc test.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pvalue_matrix: DataFrame with pair-wise p-values.</span>
+<span class="sd">        alpha: Significance level (default: 0.05). Values &lt;= alpha will be in bold.</span>
+<span class="sd">        min_alpha: The exact value where the color changes to green (default: 0.10).</span>
+<span class="sd">        figsize: Size of the figure (width, height).</span>
+<span class="sd">        fontsize: Size of the font used in this plot.</span>
+<span class="sd">        grid_linewidth: Width for the grid line used between cells.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Figure instance from matplotlib, can be saved or showed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+
+    <span class="n">model_means</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">model_means</span>
+    <span class="n">higher_is_better</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">higher_is_better</span>
+    <span class="n">base_alpha</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">alpha</span>
+
+    <span class="n">models</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">model_means</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> 
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">model_means</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> 
+        <span class="n">reverse</span><span class="o">=</span><span class="n">higher_is_better</span>
+    <span class="p">)</span>
+    <span class="n">n_models</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n_models</span><span class="p">,</span> <span class="n">n_models</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">sig_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n_models</span><span class="p">,</span> <span class="n">n_models</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">winner_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n_models</span><span class="p">,</span> <span class="n">n_models</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">pairwise_results</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">model_a</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">model_b</span><span class="p">)</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">p_value</span>
+        <span class="n">sig_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">sig_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">is_significant</span>
+        <span class="n">winner_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">winner_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">winner</span>
+
+
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;RdYlGn_r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">cmap</span><span class="o">.</span><span class="n">set_bad</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#f0f0f0&quot;</span><span class="p">)</span> 
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">TwoSlopeNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vcenter</span><span class="o">=</span><span class="n">base_alpha</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="n">aspect</span><span class="p">)</span>
+
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Adjusted P-value&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_models</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_models</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">rotation_mode</span><span class="o">=</span><span class="s2">&quot;anchor&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_models</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_models</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+                        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">is_sig</span> <span class="o">=</span> <span class="n">sig_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">winner</span> <span class="o">=</span> <span class="n">winner_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">row_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">is_sig</span><span class="p">:</span>
+                    <span class="n">indicator</span> <span class="o">=</span> <span class="s2">&quot; (↑)&quot;</span> <span class="k">if</span> <span class="n">winner</span> <span class="o">==</span> <span class="n">row_model</span> <span class="k">else</span> <span class="s2">&quot; (↓)&quot;</span>
+                    <span class="n">weight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span>
+                    <span class="n">text_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}{</span><span class="n">indicator</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">weight</span> <span class="o">=</span> <span class="s2">&quot;normal&quot;</span>
+                    <span class="n">text_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                <span class="n">text_color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">base_alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;black&quot;</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">text_str</span><span class="p">,</span>
+                        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">,</span>
+                        <span class="n">fontweight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">grid_linewidth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_models</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_models</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;minor&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">grid_linewidth</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;minor&quot;</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Pairwise Comparison Matrix</span><span class="se">\n</span><span class="s2">(Post-Hoc P-values)&quot;</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="labicompare.plots.scatter.plot_one_vs_one"></a>
+    <div class="doc doc-contents first">
+
+        <p>Generates a scatter plot comparing the results of two specific models
+dataset per dataset. Diagonal line represents draws (y = x).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>data</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="labicompare.core.data.EvaluationData" href="../data/#labicompare.core.data.EvaluationData">EvaluationData</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>EvaluationData containing all results.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model_x</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the model that will be represented in the X-axis.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model_y</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name fo the model that will be represented in the Y-axis.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>figsize</code>
+            </td>
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="float">float</span>, <span title="float">float</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Figure size.</p>
+              </div>
+            </td>
+            <td>
+                  <code>(6, 6)</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>point_size</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Point size used in scatter plot.</p>
+              </div>
+            </td>
+            <td>
+                  <code>50</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>alpha_points</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Point transparency (useful for overlays).</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.7</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="matplotlib.pyplot.Figure">Figure</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Matplotlib figure.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>labicompare/plots/scatter.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span>
+<span class="normal">98</span>
+<span class="normal">99</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_one_vs_one</span><span class="p">(</span>
+  <span class="n">data</span><span class="p">:</span> <span class="n">EvaluationData</span><span class="p">,</span>
+  <span class="n">model_x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="n">model_y</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="n">figsize</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+  <span class="n">point_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="n">alpha_points</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Generates a scatter plot comparing the results of two specific models</span>
+<span class="sd">  dataset per dataset. Diagonal line represents draws (y = x).</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    data: EvaluationData containing all results.</span>
+<span class="sd">    model_x: Name of the model that will be represented in the X-axis.</span>
+<span class="sd">    model_y: Name fo the model that will be represented in the Y-axis.</span>
+<span class="sd">    figsize: Figure size.</span>
+<span class="sd">    point_size: Point size used in scatter plot.</span>
+<span class="sd">    alpha_points: Point transparency (useful for overlays).</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    Matplotlib figure.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">model_x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">model_names</span> <span class="ow">or</span> <span class="n">model_y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">model_names</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Models &#39;</span><span class="si">{</span><span class="n">model_x</span><span class="si">}</span><span class="s2">&#39; or &#39;</span><span class="si">{</span><span class="n">model_y</span><span class="si">}</span><span class="s2">&#39; not found in data.&quot;</span><span class="p">)</span>
+
+  <span class="n">perf_x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">model_x</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+  <span class="n">perf_y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">model_y</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+  <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+  <span class="n">min_val</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">perf_x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">perf_y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+  <span class="n">max_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">perf_x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">perf_y</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+  <span class="n">padding</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+  <span class="k">if</span> <span class="n">padding</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+  <span class="n">lim_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">min_val</span> <span class="o">-</span> <span class="n">padding</span>
+  <span class="n">lim_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">max_val</span> <span class="o">+</span> <span class="n">padding</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">lim_min</span><span class="p">,</span> <span class="n">lim_max</span><span class="p">],</span> <span class="p">[</span><span class="n">lim_min</span><span class="p">,</span> <span class="n">lim_max</span><span class="p">],</span> 
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Draw-line (y = x)&quot;</span>
+  <span class="p">)</span>
+
+  <span class="n">diff</span> <span class="o">=</span> <span class="n">perf_x</span> <span class="o">-</span> <span class="n">perf_y</span>
+  <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">higher_is_better</span><span class="p">:</span>
+    <span class="n">x_wins</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">y_wins</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">x_wins</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span>
+    <span class="n">y_wins</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span>
+  <span class="n">ties</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">0</span>
+
+  <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x_wins</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+      <span class="n">perf_x</span><span class="p">[</span><span class="n">x_wins</span><span class="p">],</span> <span class="n">perf_y</span><span class="p">[</span><span class="n">x_wins</span><span class="p">],</span> 
+      <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">point_size</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_points</span><span class="p">,</span> 
+      <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_x</span><span class="si">}</span><span class="s2"> wins (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">perf_x</span><span class="p">[</span><span class="n">x_wins</span><span class="p">])</span><span class="si">}</span><span class="s2"> datasets)&quot;</span>
+    <span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">y_wins</span><span class="p">):</span>
+      <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+          <span class="n">perf_x</span><span class="p">[</span><span class="n">y_wins</span><span class="p">],</span> <span class="n">perf_y</span><span class="p">[</span><span class="n">y_wins</span><span class="p">],</span> 
+          <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d62728&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">point_size</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_points</span><span class="p">,</span> 
+          <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_y</span><span class="si">}</span><span class="s2"> wins (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">perf_x</span><span class="p">[</span><span class="n">y_wins</span><span class="p">])</span><span class="si">}</span><span class="s2"> datasets)&quot;</span>
+      <span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">ties</span><span class="p">):</span>
+      <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+          <span class="n">perf_x</span><span class="p">[</span><span class="n">ties</span><span class="p">],</span> <span class="n">perf_y</span><span class="p">[</span><span class="n">ties</span><span class="p">],</span> 
+          <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">point_size</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+          <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Exact draws (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">perf_x</span><span class="p">[</span><span class="n">ties</span><span class="p">])</span><span class="si">}</span><span class="s2"> datasets)&quot;</span>
+      <span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="n">lim_min</span><span class="p">,</span> <span class="n">lim_max</span><span class="p">))</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="n">lim_min</span><span class="p">,</span> <span class="n">lim_max</span><span class="p">))</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performance: </span><span class="si">{</span><span class="n">model_x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performance: </span><span class="si">{</span><span class="n">model_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;One versus One Plot between </span><span class="se">\n</span><span class="si">{</span><span class="n">model_x</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">model_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+  <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+  <span class="k">return</span> <span class="n">fig</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
